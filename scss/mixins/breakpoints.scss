@@ -1,0 +1,39 @@
+$Breakpoints: "small" 1, "medium" 481, "large" 768, "huge" 1200 !default;
+$Breakpoints-units: "px" !default;
+$MediaQueries-fixedWidth: false !default;
+
+@mixin bp($name) {
+	$break: valueForKey($name, $Breakpoints);
+
+	@if $MediaQueries-fixedWidth { 
+		@if $break {
+			@if $MediaQueries-fixedWidth > $break {
+				@content;
+			}
+		} @else {
+			@if $MediaQueries-fixedWidth > $name {
+				@content;
+			}
+		}
+	} @else {
+		@if ($break) {
+			@media screen and (min-width: #{$break}#{$Breakpoints-units}) {
+				@content;
+			}
+		} @else {
+			@media screen and (min-width: #{$name}#{$Breakpoints-units}) {
+				@content;
+			}
+		}
+	}
+}
+
+@function valueForKey($key, $hash) {
+	@each $set in $hash {
+		@if $key == nth($set, 1) {
+			@return nth($set, 2);
+		}
+	}
+
+	@return false;
+}

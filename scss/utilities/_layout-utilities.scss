@@ -1,0 +1,8 @@
+.u-clearfix {
+	&:before, &:after {
+		content: ' ';
+		display: table;
+		
+	}
+}
+.u-clearfix-of { overflow: hidden !important; }

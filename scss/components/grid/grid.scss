@@ -1,0 +1,21 @@
+/**
+ * A grid is a multirow container which holds cells of content. These cells will align flush the 
+ * edges of the grid and will wrap automatically. Cells are fluid in size.
+ */
+$Grid-padding: 1em !default;
+$Grid-columnCount: 10;
+
+.Grid {
+	margin-left: -$Grid-padding; // adjust to allow first cell in each row to sit flush
+}
+
+[class*="Grid-cell"] {
+	float: left;
+	padding-left: $Grid-padding;
+}
+
+@for $width from 1 through $Grid-columnCount {
+	.Grid-cell#{$width}of#{$Grid-columnCount} {
+		width: $width/$Grid-columnCount * 100%;
+	}
+}
